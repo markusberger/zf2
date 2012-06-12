@@ -142,4 +142,12 @@ class Expression implements ExpressionInterface
         ));
     }
 
+    /**
+     * @return string The string of the SQL expression stored in this object.
+     */
+    public function __toString()
+    {
+        return $this->expression;
+    }
+
 }
