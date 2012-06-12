@@ -106,15 +106,15 @@ class Insert implements SqlInterface, PreparableSqlInterface
         $keys = array_keys($values);
         $firstKey = current($keys);
 
-        if (is_string($firstKey)) {
+        if (is_string($firstKey) && $flag == self::VALUES_SET) {
             $this->columns($keys);
-            $values = array_values($values);
-        } elseif (is_int($firstKey)) {
-            $values = array_values($values);
-        }
+		}
+
+		$values = array_values($values);
 
         if ($flag == self::VALUES_MERGE) {
             $this->values = array_merge($this->values, $values);
+			$this->columns = array_merge($this->columns, $keys);
         } else {
             $this->values = $values;
         }

@@ -217,7 +217,9 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     protected function executeSelect(Select $select)
     {
         $selectState = $select->getRawState();
-        if ($selectState['table'] != $this->table) {
+		$selectTable = ($selectState['table'] instanceof TableIdentifier) ? $selectState['table']->getTable() : $selectState['table'];
+		
+        if ($selectTable != $this->table) {
             throw new \RuntimeException('The table name of the provided select object must match that of the table');
         }
 

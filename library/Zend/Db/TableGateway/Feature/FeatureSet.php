@@ -68,6 +68,7 @@ class FeatureSet
     {
         $this->features[] = $feature;
         $feature->setTableGateway($feature);
+		$this->magicSpecifications[get_class($feature)] = $feature->getMagicMethodSpecifications();
         return $this;
     }
 
@@ -128,6 +129,10 @@ class FeatureSet
      */
     public function canCallMagicCall($method)
     {
+		foreach($this->magicSpecifications as $magicSpecification) {
+			if(in_array($method, $magicSpecification))
+				return true;
+		}
         return false;
     }
 
@@ -138,7 +143,15 @@ class FeatureSet
      */
     public function callMagicCall($method, $arguments)
     {
-        $return = null;
+		$return = null;
+		
+		foreach($this->magicSpecifications as $feature=>$magicSpecification) {
+			if(in_array($method, $magicSpecification)) {
+				$feature = $this->getFeatureByClassName($feature);
+				$return = call_user_func_array(array($feature, $method), $arguments);
+			}
+		}
+        
         return $return;
     }
 }
