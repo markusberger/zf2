@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\Stdlib\Exception;
+namespace Zend\EventManager\Exception;
 
 class DomainException extends \DomainException implements ExceptionInterface
 {

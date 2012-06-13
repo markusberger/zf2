@@ -18,16 +18,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Stdlib\Exception;
+namespace Zend\EventManager\Exception;
 
 /**
- * Bad method call exception
+ * Invalid callback exception
  *
  * @category   Zend
- * @package    Zend_Stdlib
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class BadMethodCallException extends \BadMethodCallException implements ExceptionInterface
+class InvalidCallbackException extends DomainException implements ExceptionInterface
 {
 }
